@@ -34,9 +34,13 @@ def callback():
 
     return'OK'
 
-
+'''
 @handler.add(MessageEvent, message=ImageMessage)
+'''
+
+@handler.add(MessageEvent, message=TextSendMessage)
 def handle_image_message(event):
+    '''
     message_content = line_bot_api.get_message_content(event.message.id)
     # 取得した画像ファイル
     with open("static/"+event.message.id+".jpg", "wb") as f:
@@ -56,8 +60,9 @@ def handle_image_message(event):
             text = "This is cat"
         if result_predict >= 0.5:
             text = "This is dog"
-
+'''
         #line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url=FQDN+"/static/"+event.message.id+".jpg",preview_image_url=FQDN+"/static/"+event.message.id+".jpg"))
+        text = 'やっほい'
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=text))
 
 if __name__ == "__main__":
